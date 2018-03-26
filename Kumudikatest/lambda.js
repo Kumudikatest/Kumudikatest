@@ -28,8 +28,8 @@ exports.handler = function (event, context, callback) {
 	event.Result = result;
 
 	ddb.put({
-		TableName: 'kumutable',
-		Item: { 'id': event.id, 'result': result }
+		TableName: 'kumudikatest',
+		Item: { 'ID': event.ID, 'result': result }
 	}, function (err, data) {
 		if (err) {
 			console.log('fail');
