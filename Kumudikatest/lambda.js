@@ -4,6 +4,7 @@ exports.handler = function (event, context, callback) {
 
 	console.log("Received request with payload", event);
 	let operation = event.Operation;
+	let id = event.ID;
 	let result = null;
 	switch (operation) {
 		case "Add":
@@ -28,20 +29,18 @@ exports.handler = function (event, context, callback) {
 	event.Result = result;
 
 	ddb.put({
-		TableName: 'Kumudikatest',
-		Item: {
-			'ID': event.ID
-		}
+		TableName: 'KumuTest',
+		Item: { 'ID': id }
 	}, function (err, data) {
 		if (err) {
-			console.log('fail');
+			console.log('Error ',err);
 			callback(null, err);
 		} else {
-			console.log('success');
+			console.log('Data ',data);
 			callback(null, data);
-
 		}
 	});
+
 
 
 	//callback(null, event);
