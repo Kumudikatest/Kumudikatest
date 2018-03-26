@@ -35,8 +35,10 @@ exports.handler = function (event, context, callback) {
 	}, function (err, data) {
 		if (err) {
 			console.log('fail');
+			callback(null, err);
 		} else {
 			console.log('success');
+			callback(null, data);
 
 		}
 	});
