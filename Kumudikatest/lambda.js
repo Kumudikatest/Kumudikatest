@@ -1,10 +1,11 @@
 let AWS = require('aws-sdk');
-exports.handler = function(event, context, callback) {
+const ddb = new AWS.DynamoDB.DocumentClient();
+exports.handler = function (event, context, callback) {
 
-console.log("Received request with payload", event);
+	console.log("Received request with payload", event);
 	let operation = event.Operation;
 	let result = null;
-	switch(operation) {
+	switch (operation) {
 		case "Add":
 			result = event.LeftParameter + event.RightParameter;
 			break;
@@ -25,6 +26,20 @@ console.log("Received request with payload", event);
 			break;
 	}
 	event.Result = result;
+
+	ddb.put({
+		TableName: 'kumutable',
+		Item: { 'id': event.id, 'result': result }
+	}, function (err, data) {
+		if (err) {
+			console.log('fail');
+		} else {
+			console.log('success');
+			
+		}
+	});
+
+
 	callback(null, event);
-	
+
 }
