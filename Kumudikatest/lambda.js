@@ -30,7 +30,7 @@ exports.handler = function (event, context, callback) {
 
 	ddb.put({
 		TableName: 'KumuTest',
-		Item: { 'ID': id }
+		Item: { 'ID': id, 'Result':result}
 	}, function (err, data) {
 		if (err) {
 			console.log('Error ',err);
