@@ -14,7 +14,7 @@ exports.handler = function (event, context, callback) {
 			result = event.LeftParameter - event.RightParameter;
 			break;
 		case "Multiply":
-			result = event.LeftParameter + event.RightParameter;
+			result = event.LeftParameter * event.RightParameter;
 			break;
 		case "Devide":
 			result = event.LeftParameter / event.RightParameter;
